@@ -16,7 +16,7 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 
 
-const API_URL = "https://621885221a1ba20cbaa3262f.mockapi.io";
+const API_URL = "https://book-app-node.herokuapp.com";
 
 function App(){
 
@@ -24,7 +24,7 @@ function App(){
   
   console.log(books);
   useEffect(()=>{
-    fetch(`${API_URL}/users`, {method:"GET"})
+    fetch(`${API_URL}/book`, {method:"GET"})
     .then((data)=>data.json())
     .then((mvs)=>setBooks(mvs));
   }, []);
@@ -171,7 +171,7 @@ function BookDetails() {
 const [bookdet, setBookdet] = useState({});
 
 useEffect(()=>{
-  fetch(`${API_URL}/users/${id}`, {method:"GET"})
+  fetch(`${API_URL}/book/${id}`, {method:"GET"})
   .then((data)=>data.json())
   .then((mv)=>setBookdet(mv));
 }, [id]);
@@ -207,7 +207,7 @@ function Booklist(){
   const [books, setBooks] = useState([]);
  
   const getBooks = () => {
-    fetch(`${API_URL}/users`, {method:"GET"})
+    fetch(`${API_URL}/book`, {method:"GET"})
     .then((data)=>data.json())
     .then((mvs)=>setBooks(mvs));
   };
@@ -217,10 +217,13 @@ function Booklist(){
     <div>
 <Buttonbar />
 <section className='section-margin'>
-{books.map(({image,bookname,author,id})=>(<Bookslit image={image}
+{books.map(({image,bookname,author,id,_id})=>(<Bookslit
+key={_id}
+id={_id}
+image={image}
  bookname={bookname}
   author={author}
-   id={id}/>))}
+  />))}
 </section>
     </div>
   );
@@ -266,7 +269,7 @@ function Bookeditpage(){
   const [books, setBooks] = useState([]);
 
   const getBooks = () => {
-    fetch(`${API_URL}/users`, {method:"GET"})
+    fetch(`${API_URL}/book`, {method:"GET"})
     .then((data)=>data.json())
     .then((mvs)=>setBooks(mvs));
   };
@@ -274,8 +277,8 @@ function Bookeditpage(){
   useEffect(getBooks, []);
 
 
-const deleteMovie = (id) =>{
-  fetch(`${API_URL}/users/${id}`, {method:"DELETE"})
+const deleteMovie = (_id) =>{
+  fetch(`${API_URL}/book/${_id}`, {method:"DELETE"})
   .then(()=>getBooks());
 };
 
@@ -285,17 +288,20 @@ const deleteMovie = (id) =>{
     <div>
       <Buttonbar />
 <section className='section-margin'>
-{books.map(({image,bookname,author,id},index)=>(<Listbookeditpage image={image}
+{books.map(({image,bookname,author,id,_id})=>(<Listbookeditpage 
+key={_id}
+id={_id}
+image={image}
  bookname={bookname} 
  author={author} 
-id={index}
+
 deleteButton= {<Button aria-label="delete" color="error"
-       onClick={()=> deleteMovie(id)}>
+       onClick={()=> deleteMovie(_id)}>
        <DeleteIcon />Delete
      </Button>}
        editButton= {<Button 
         aria-label="edit"  color="success"
-       onClick={()=>history.push("/updatebook/edit/" + id)}>
+       onClick={()=>history.push("/updatebook/edit/" + _id)}>
        <EditIcon />Edit
      </Button>}
 />))}
@@ -357,7 +363,7 @@ const {handleSubmit, values, handleChange, handleBlur, errors, touched} = useFor
 const addBook =(newBooks)=>{
 
 console.log(newBooks)
-  fetch(`${API_URL}/users`, {
+  fetch(`${API_URL}/book`, {
     method:"POST",
     body: JSON.stringify(newBooks),
     headers: {'Content-Type': 'application/json'},
@@ -461,7 +467,7 @@ function EditBook(){
 
 const [bookdet, setBookdet] = useState(null);
 useEffect(()=>{
-  fetch(`${API_URL}/users/${id}`, {method:"GET"})
+  fetch(`${API_URL}/book/${id}`, {method:"GET"})
   .then((data)=>data.json())
   .then((mv)=>setBookdet(mv));
 }, [id]);
@@ -504,7 +510,7 @@ function UpdateBook({bookdet}){
    
     console.log(updatedBooks);
 
-  fetch(`${API_URL}/users/${bookdet.id}`, {
+  fetch(`${API_URL}/book/${bookdet._id}`, {
     method:"PUT",
     body: JSON.stringify(updatedBooks),
     headers: {'Content-Type': 'application/json'},
@@ -629,7 +635,7 @@ function LoginPage() {
       if (response.status === 401) {
         history.push("/loginfailed");
       } else {
-        history.push("/homepage");
+        history.push("/home");
       }
 
     });
@@ -721,7 +727,7 @@ function SignupPage() {
       if (response.status === 400) {
         history.push("/signupfailed");
       } else {
-        history.push("/homepage");
+        history.push("/home");
       }
     });
   };
