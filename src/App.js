@@ -34,8 +34,17 @@ function App(){
     <div className="App">   
 
       <Switch>
-      
-      <Route exact path="/">
+    
+
+        <Route exact path="/">
+          <LoginPage />
+        </Route>
+        
+          <Route path="/signup">
+          <SignupPage />
+        </Route>
+          
+      <Route path="/home">
           <Home />
         </Route>
 
@@ -59,6 +68,15 @@ function App(){
           <Bookeditpage />
         </Route>
 
+        <Route path="/signupfailed">
+          <SignupFailed />
+        </Route>
+
+        <Route path="/loginfailed">
+          <LoginFailed />
+        </Route>
+
+        
 
       </Switch>
    
@@ -74,10 +92,45 @@ function Home(){
   return(
     <div>
       <Buttonbar />
-      helloooooo
+     <div className='img-div-home'>
+       <div className='text-div-home'>
+       <p className='text-design'>A PLACE IS</p>
+       <p className='text-design'>NOT A PLACE</p>
+       <p className='text-design-store'>UNTIL IT HAS A BOOK STORE</p>
+     </div>
+     </div>
+     <div>
+       <p className='text-design-service'>SERVICE WE CAN PROVIDE</p>
+       <p className='text-design-here'>Here is a customised world of books for you</p>
+     </div>
+     <Designbar />
     </div>
   );
 }
+
+
+
+function Designbar(){
+  const history = useHistory();
+  return(
+    <section className='logo-section'>
+      <div className='icon-logo-div' onClick={()=>history.push("/booklist")}>
+        <img className='icon-logo' src='https://i.fbcd.co/products/resized/resized-750-500/ae2d64e634f5beaa6f0e867d529ece28f0504e9e24fc4d5e0d6fd21f0a05df7f.jpg' alt='books'/>
+        <p>Books</p>
+      </div>
+      <div className='icon-logo-div' onClick={()=>history.push("/addbooks")}>
+        <img className='icon-logo-a' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgNuZsi_fFFdOXwXEWVCLQdf6zUTS1e4ML7-TybIi8Y6Qb5egg4uD_goq1N8cXZQfg02E&usqp=CAU' alt='design books'/>
+        <p>Design Book</p>
+      </div>
+      <div className='icon-logo-div' onClick={()=>history.push("/updatebook")}>
+        <img className='icon-logo-b' src='https://static.thenounproject.com/png/147590-200.png' alt='rework books'/>
+        <p>Rework</p>
+      </div>
+    </section>
+  );
+}
+
+
 
 
 function Buttonbar(){
@@ -91,7 +144,7 @@ function Buttonbar(){
       <div className='menu-icon' onClick={()=>setShow(!show)}><MenuIcon /></div>
       {show?
       <div className='button-flex'>
-     <p varient="text" className='button' onClick={()=>history.push("/")}>Home</p>
+     <p varient="text" className='button' onClick={()=>history.push("/home")}>Home</p>
       <p varient="text" className='button' onClick={()=>history.push("/booklist")}>Books</p>
       <p varient="text" className='button' onClick={()=>history.push("/addbooks")}>Addbooks</p>
       <p varient="text" className='button' onClick={()=>history.push("/updatebook")}>Editbook</p>
@@ -99,10 +152,12 @@ function Buttonbar(){
       }
 
       <div className='button-flex-div'>
-     <p varient="text" className='button' onClick={()=>history.push("/")}>Home</p>
+     <p varient="text" className='button' onClick={()=>history.push("/home")}>Home</p>
       <p varient="text" className='button' onClick={()=>history.push("/booklist")}>Books</p>
       <p varient="text" className='button' onClick={()=>history.push("/addbooks")}>Addbooks</p>
       <p varient="text" className='button' onClick={()=>history.push("/updatebook")}>Editbook</p>
+      <p varient="text" color="inherit" onClick={()=>history.push("/login")}>Log in</p>
+       <p varient="text" color="inherit" onClick={()=>history.push("/signup")}>Sign up</p>
       </div>
     </div>
   );
@@ -547,8 +602,180 @@ function UpdateBook({bookdet}){
       );
 }
 
+function LoginPage() {
+  const history = useHistory();
+  const formvalidationschema = yup.object({
+    email: yup.string().min(5, "need a bigger email").required(),
+    password: yup.string().min(5).max(12).required(),
+  });
+
+  const { handleSubmit, values, handleChange, handleBlur, errors, touched } = useFormik({
+    initialValues: { email: "", password: "" },
+    validationSchema: formvalidationschema,
+
+    onSubmit: (newlogin) => {
+      console.log("onsubmit", newlogin);
+      addData(newlogin);
+    }
+  });
+
+  const addData = (newlogin) => {
+    console.log(newlogin);
+    fetch(`${API_URL}/login`, {
+      method: "POST",
+      body: JSON.stringify(newlogin),
+      headers: { 'Content-Type': 'application/json' },
+    }).then((response) => {
+      if (response.status === 401) {
+        history.push("/loginfailed");
+      } else {
+        history.push("/homepage");
+      }
+
+    });
+
+  };
+
+  return (
+    <section className='login-page-background'>
+    <form className="login-page" onSubmit={handleSubmit}>
+
+      <p className="login-head">Login</p>
+      <p className="please">Please enter your e-mail id and Password</p>
+
+      <TextField
+      variant="outlined"
+       id="email"
+        name="email"
+        value={values.email}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        type="email"
+        error={errors.email && touched.email}
+        helperText={errors.email && touched.email && errors.email}
+        placeholder="Enter your Email" />
 
 
+      <TextField 
+      variant="outlined"
+      id="password"
+        name="password"
+        value={values.password}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        type="password"
+        autoComplete="current-password"
+        error={errors.password && touched.password}
+        helperText={errors.password && touched.password && errors.password}
+        placeholder="Enter your Password" />
+
+      <Button variant="contained" type="submit">log in</Button>
+      <div className='signup-link'>
+      <p  className="please">Don't have an account ?</p>
+      <p onClick={()=>history.push("/signup")} className="signup-word">SIGN UP</p>
+    </div>
+      <div>
+      <p className="please">Sample Credentials</p>
+        <p>Email: test@gmail.com</p>
+        <p>Password: password123@</p>
+        
+      </div>
+    </form>
+    </section>
+  );
+}
+
+function LoginFailed() {
+  return (
+    <div>
+      <img className="failed" src="https://icon-library.com/images/red-cross-icon-png/red-cross-icon-png-27.jpg" alt="Login failed" />
+      <h2>Invalid Credentials</h2>
+    </div>
+  );
+}
+
+
+function SignupPage() {
+  const history = useHistory();
+  const formvalidationschema = yup.object({
+    email: yup.string().min(5, "need a bigger email").required(),
+    password: yup.string().min(5).max(12).required(),
+  });
+
+  const { handleSubmit, values, handleChange, handleBlur, errors, touched } = useFormik({
+    initialValues: { email: "", password: "" },
+    validationSchema: formvalidationschema,
+
+    onSubmit: (newSignup) => {
+      console.log("onsubmit", newSignup);
+      addData(newSignup);
+    }
+  });
+  const addData = (newSignup) => {
+    console.log(newSignup);
+    fetch(`${API_URL}/signup`, {
+      method: "POST",
+      body: JSON.stringify(newSignup),
+      headers: { 'Content-Type': 'application/json' },
+    }).then((response) => {
+      if (response.status === 400) {
+        history.push("/signupfailed");
+      } else {
+        history.push("/homepage");
+      }
+    });
+  };
+  return (
+    <section className='login-page-background'>
+    <form className="login-page" onSubmit={handleSubmit}>
+      <div className="login-page">
+        <p className="login-head">sign up</p>
+        <p className="please">Please enter your e-mail id and Password</p>
+        <TextField 
+         variant="outlined"
+        id="email"
+          name="email"
+          value={values.email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          type="email"
+          error={errors.email && touched.email}
+          helperText={errors.email && touched.email && errors.email}
+          placeholder="Enter your Email" />
+
+        <TextField
+         variant="outlined"
+        id="password"
+          name="password"
+          value={values.password}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          type="password"
+          autoComplete="current-password"
+          error={errors.password && touched.password}
+          helperText={errors.password && touched.password && errors.password}
+          placeholder="Enter your Password" />
+        <Button variant="contained" type="submit">sign up</Button>
+
+        <div>
+        <p className="please">Sample Credentials</p>
+          <p>Email: test@gmail.com</p>
+          <p>Password: password123@</p>
+        </div>
+      </div>
+    </form>
+    </section>
+  );
+}
+
+function SignupFailed() {
+  return (
+    <div>
+      <img className="failed" src="https://icon-library.com/images/red-cross-icon-png/red-cross-icon-png-27.jpg" alt="signup failed" />
+      <h2>email already exists or password must be longer</h2>
+    </div>
+  );
+}
 
 
 

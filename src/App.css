@@ -144,6 +144,157 @@ display:flex;
   font-weight: 600;
   }
   
+  .img-div-home{
+      background-image: linear-gradient(rgba(128, 125, 125, 0.3),transparent),url("https://wallpaperaccess.com/full/124383.jpg");
+   background-repeat: no-repeat;
+   background-size: cover;
+   height: 450px;
+   animation: slider 9s infinite linear;
+  }
+
+  .text-div-home{
+    padding-top: 120px;
+    margin-left: 120px;
+  }
+
+  .text-design{
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 2px;
+    font-size: 80px;
+    margin: 0;
+    color: rgb(224, 209, 230);
+    font-weight: 800;
+    display: flex;
+  }
+
+  .text-design-store{
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 1px;
+    font-size: 30px;
+    margin: 0;
+    color: rgb(214, 226, 222);
+    font-weight: 500;
+    display: flex;
+  }
+  .text-design-service{
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 1px;
+    font-size: 30px;
+    margin: 0;
+    font-weight: 500;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding-top: 30px;
+  }
+  .text-design-here{
+    font-family: 'Open Sans', sans-serif;
+    letter-spacing: 1px;
+    font-size: 20px;
+    margin: 0;
+    font-weight: 300;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding-top: 6px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+.icon-logo-div{
+  padding: 10px;
+   margin: 10px;
+  height: 150px;
+  width: 150px;
+  box-shadow: 0px 0px 10px 0px rgb(68, 67, 67);
+  cursor: pointer;
+}
+
+.logo-section{
+  margin-top: 50px;
+  display: flex;
+      flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+  .icon-logo{
+    padding-top: 10px;
+    height: 90px;
+    width: 90px;
+    object-fit: cover;
+  }
+  .icon-logo-a{
+    padding-top: 10px;
+    height: 80px;
+    width: 80px;
+    object-fit: cover;
+  }
+  .icon-logo-b{
+    padding-top: 15px;
+    height: 70px;
+    width: 70px;
+    object-fit: cover;
+  }
+
+.login-page-background{
+  background-image: linear-gradient(to left bottom, #55f210, #00e49e, #00ccf3, #00aaff, #377fee);
+  height: 100vh;
+}
+
+
+.login-page{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+  align-items: stretch;
+  gap: 10px;
+}
+.login-head{
+  font-family: 'Open Sans', sans-serif;
+    letter-spacing: 1px;
+    font-size: 40px;
+    font-weight: 500;
+  margin-top: 50px;
+}
+.please{
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 1px;
+  font-size: 20px;
+  font-weight: 200;
+
+}
+.icons{
+  display: flex;
+  flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.failed{
+  object-fit: cover;
+  height: 200px;
+  width: 200px;
+ border-radius: 60%;
+}
+
+.signup-link{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.signup-word{
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 1px;
+  font-size: 20px;
+  font-weight: 200;
+  text-decoration: underline;
+}
+
 
   @media(max-width:1100px){
     .section-margin{
@@ -201,10 +352,63 @@ display:flex;
 }
 
 .details-name{
-  height: 400px;
+  height: min-content;
   width: 430px;
+  margin-bottom: 100px;
+}
+
+.text-div-home{
+  padding-top: 120px;
+  margin-left: 20px;
+}
+
+
+.text-design{
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 2px;
+  font-size: 40px;
+  margin: 0;
+  color: rgb(224, 209, 230);
+  font-weight: 600;
+  display: flex;
+}
+
+.text-design-store{
+  font-family: 'Open Sans', sans-serif;
+  letter-spacing: 1px;
+  font-size: 15px;
+  margin: 0;
+  color: rgb(214, 226, 222);
+  font-weight: 300;
+  display: flex;
+}
+
+.logo-section{
+  margin-bottom: 150px;
+ 
+}
+
+.login-page-background{
+padding-left: 20px;
+padding-right: 20px;
+padding-bottom: 200px;
 }
 
 }
 
-
+@keyframes slider{
+0%{ background-image: linear-gradient(rgba(128, 125, 125, 0.3),transparent),url("https://wallpaperaccess.com/full/124493.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+35%{
+  background-image: linear-gradient(rgba(128, 125, 125, 0.3),transparent),url("https://w0.peakpx.com/wallpaper/972/48/HD-wallpaper-stack-of-books-blue-background-education-concepts-books-library-school-learning-concepts.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+75%{
+  background-image: linear-gradient(rgba(128, 125, 125, 0.3),transparent),url("https://music.paruto.io/wp-content/uploads/2018/03/books-wallpaper-49796-51475-hd-wallpapers.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+}
