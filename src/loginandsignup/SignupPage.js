@@ -32,7 +32,7 @@ export function SignupPage() {
       if (response.status === 400) {
         history.push("/signupfailed");
       } else {
-        history.push("/home");
+        history.push("/login");
       }
     });
   };
@@ -68,11 +68,6 @@ export function SignupPage() {
             placeholder="Enter your Password" />
           <Button variant="contained" type="submit">sign up</Button>
 
-          <div>
-            <p className="please">Sample Credentials</p>
-            <p>Email: test@gmail.com</p>
-            <p>Password: password123@</p>
-          </div>
         </div>
       </form>
     </section>
