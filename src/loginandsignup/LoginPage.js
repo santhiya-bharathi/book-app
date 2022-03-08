@@ -33,6 +33,7 @@ export function LoginPage() {
       if (response.status === 401) {
         history.push("/loginfailed");
       } else {
+        alert('Login Successful');
         history.push("/home");
       }
 

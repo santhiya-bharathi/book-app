@@ -32,6 +32,7 @@ export function SignupPage() {
       if (response.status === 400) {
         history.push("/signupfailed");
       } else {
+        alert('signup Successful');
         history.push("/");
       }
     });
@@ -67,7 +68,10 @@ export function SignupPage() {
             helperText={errors.password && touched.password && errors.password}
             placeholder="Enter your Password" />
           <Button variant="contained" type="submit">sign up</Button>
-
+         <div className='signup-link'>
+          <p className="please">Already Registered ?</p>
+          <p onClick={() => history.push("/")} className="signup-word">Click here to login</p>
+        </div>
         </div>
       </form>
     </section>
