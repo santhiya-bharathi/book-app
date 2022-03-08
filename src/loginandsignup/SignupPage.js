@@ -32,7 +32,7 @@ export function SignupPage() {
       if (response.status === 400) {
         history.push("/signupfailed");
       } else {
-        history.push("/login");
+        history.push("/");
       }
     });
   };
