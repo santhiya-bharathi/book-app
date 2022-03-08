@@ -30,7 +30,8 @@ export function SignupPage() {
       headers: { 'Content-Type': 'application/json' },
     }).then((response) => {
       if (response.status === 400) {
-        history.push("/signupfailed");
+        alert('Invalid credentials');
+        history.push("/signup");
       } else {
         alert('signup Successful');
         history.push("/");

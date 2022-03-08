@@ -31,7 +31,8 @@ export function LoginPage() {
       headers: { 'Content-Type': 'application/json' },
     }).then((response) => {
       if (response.status === 401) {
-        history.push("/loginfailed");
+        alert('Invalid credentials');
+        history.push("/");
       } else {
         alert('Login Successful');
         history.push("/home");
