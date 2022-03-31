@@ -64,7 +64,7 @@ function Listbookeditpage({ image, bookname, author, editButton, deleteButton })
             {editButton}
           </div>
           <div>
-            {deleteButton}
+            {/* {deleteButton} */}
           </div>
         </div>
       </div>

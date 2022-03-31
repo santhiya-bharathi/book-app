@@ -5,8 +5,6 @@ import {useEffect, useState} from "react";
 import { Switch, Route } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
-import { SignupPage, SignupFailed } from './loginandsignup/SignupPage';
-import { LoginPage, LoginFailed } from './loginandsignup/LoginPage';
 import { EditBook } from './editdetails/EditBook';
 import { AddBooks } from './addbook/AddBooks';
 import { Bookeditpage } from './editdetails/Bookeditpage';
@@ -35,17 +33,9 @@ function App(){
     
 
         <Route exact path="/">
-          <LoginPage />
+        <Home />
         </Route>
         
-          <Route path="/signup">
-          <SignupPage />
-        </Route>
-          
-      <Route path="/home">
-          <Home />
-        </Route>
-
        <Route path="/addbooks">
           <AddBooks />
         </Route>
@@ -66,15 +56,6 @@ function App(){
           <Bookeditpage />
         </Route>
 
-        <Route path="/signupfailed">
-          <SignupFailed />
-        </Route>
-
-        <Route path="/loginfailed">
-          <LoginFailed />
-        </Route>
-
-        
 
       </Switch>
    
@@ -142,7 +123,7 @@ export function Buttonbar(){
       <div className='menu-icon' onClick={()=>setShow(!show)}><MenuIcon /></div>
       {show?
       <div className='button-flex'>
-     <p varient="text" className='button' onClick={()=>history.push("/home")}>Home</p>
+     <p varient="text" className='button' onClick={()=>history.push("/")}>Home</p>
       <p varient="text" className='button' onClick={()=>history.push("/booklist")}>Books</p>
       <p varient="text" className='button' onClick={()=>history.push("/addbooks")}>Addbooks</p>
       <p varient="text" className='button' onClick={()=>history.push("/updatebook")}>Editbook</p>
@@ -150,12 +131,11 @@ export function Buttonbar(){
       }
 
       <div className='button-flex-div'>
-     <p varient="text" className='button' onClick={()=>history.push("/home")}>Home</p>
+     <p varient="text" className='button' onClick={()=>history.push("/")}>Home</p>
       <p varient="text" className='button' onClick={()=>history.push("/booklist")}>Books</p>
       <p varient="text" className='button' onClick={()=>history.push("/addbooks")}>Addbooks</p>
       <p varient="text" className='button' onClick={()=>history.push("/updatebook")}>Editbook</p>
-      <p varient="text" color="inherit" onClick={()=>history.push("/login")}>Log in</p>
-       <p varient="text" color="inherit" onClick={()=>history.push("/signup")}>Sign up</p>
+     
       </div>
     </div>
   );
